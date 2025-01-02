@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=0.5">
+      <title>Periodic Table</title>
+      <style>
+         body {
+         font-family: Arial, sans-serif;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         margin-top: 20px;
+         background-color: #111;
+         }
+         h1 {
+         color: #00BFFF;
+         text-align: center;
+         text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF;
+         margin-bottom: 20px;
+         }
+         .table {
+         display: grid;
+         grid-template-columns: repeat(18, 60px); /* 18 คอลัมน์ */
+         grid-gap: 5px;
+         margin-bottom: 20px;
+         }
+         .element {
+         width: 60px;
+         height: 60px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         cursor: pointer;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         font-size: 14px;
+         color: white;
+         font-weight: bold;
+         text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF00FF;
+         box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+         transition: 0.3s;
+         background-color: transparent;
+         }
+         .element:hover {
+         box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+         color: black;
+         }
+         .metal { background-color: #00FF00; }
+         .non-metal { background-color: #FF5733; }
+         .transition-metal { background-color: #FFFF00; }
+         .noble-gas { background-color: #00BFFF; }
+         .actinide {background-color: #a536a5; }
+         .metalloid {background-color: #8e8e8e;}
+         .popup {
+         display: none;
+         position: fixed;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: white;
+         padding: 20px;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+         z-index: 999;
+         width: 300px;
+         }
+         .popup-overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 998;
+         }
+         .close-btn {
+         background-color: #FF5722;
+         color: white;
+         padding: 5px 10px;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         margin-top: 10px;
+         }
+         .legend {
+         display: flex;
+         justify-content: space-around;
+         width: 100%;
+         margin-top: 20px;
+         }
+         .legend div {
+         display: flex;
+         align-items: center;
+         font-size: 16px;
+         color: white;
+         font-weight: bold;
+         }
+         .legend div span {
+         margin-left: 10px;
+         }
+         .metal-legend { background-color: #00FF00; padding: 3px 10px; border-radius: 5px; }
+         .non-metal-legend { background-color: #FF5733; padding: 3px 10px; border-radius: 5px; }
+         .transition-metal-legend { background-color: #FFFF00; padding: 3px 10px; border-radius: 5px; }
+         .noble-gas-legend { background-color: #00BFFF; padding: 3px 10px; border-radius: 5px; }
+         .actinide-legend {background-color: #a536a5; padding: 3px 10px; border-radius: 5px; }
+         .metalloid-legend {background-color: #8e8e8e; padding: 3px 10px; border-radius: 5px; }
+      </style>
+   </head>
+   <body>
+      <h1>Periodic Table of Elements</h1>
+      <div class="table">
+         <div class="element non-metal" data-name="Hydrogen" data-symbol="H" data-number="1" data-properties="Colorless, flammable gas, the lightest element" data-Orbital="1s¹">H</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element noble-gas" data-name="Helium" data-symbol="He" data-number="2" data-properties="Colorless, odorless, inert gas" data-Orbital="1s²">He</div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Lithium" data-symbol="Li" data-number="3" data-properties="Soft, silvery-white metal"data-Orbital="1s² 2s¹">Li</div>
+         <div class="element metal" data-name="Beryllium" data-symbol="Be" data-number="4" data-properties="Hard, silvery-white, toxic metal"data-Orbital="1s² 2s²">Be</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element non-metal" data-name="Boron" data-symbol="B" data-number="5" data-properties="Hard, black-brown metal, non-metallic"data-Orbital="1s² 2s² 2p¹">B</div>
+         <div class="element non-metal" data-name="Carbon" data-symbol="C" data-number="6" data-properties="Non-metal, important for life"data-Orbital="1s² 2s² 2p²">C</div>
+         <div class="element non-metal" data-name="Nitrogen" data-symbol="N" data-number="7" data-properties="Colorless, odorless gas, makes up 78% of Earth's atmosphere"data-Orbital="1s² 2s² 2p³">N</div>
+         <div class="element non-metal" data-name="Oxygen" data-symbol="O" data-number="8" data-properties="Colorless, odorless gas essential for respiration"data-Orbital="1s² 2s² 2p⁴">O</div>
+         <div class="element non-metal" data-name="Fluorine" data-symbol="F" data-number="9" data-properties="Highly reactive, pale yellow-green gas"data-Orbital="1s² 2s² 2p⁵">F</div>
+         <div class="element noble-gas" data-name="Neon" data-symbol="Ne" data-number="10" data-properties="Inert gas, glows reddish-orange in a vacuum"data-Orbital="1s² 2s² 2p⁶">Ne</div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Sodium" data-symbol="Na" data-number="11" data-properties="Soft, silvery-white, reactive metal"data-Orbital="1s² 2s² 2p⁶ 3s¹">Na</div>
+         <div class="element metal" data-name="Magnesium" data-symbol="Mg" data-number="12" data-properties="Light, silvery-white metal"data-Orbital="1s² 2s² 2p⁶ 3s²">Mg</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element metal" data-name="Aluminum" data-symbol="Al" data-number="13" data-properties="Light, silvery-white metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p¹">Al</div>
+         <div class="element metalloid" data-name="Silicon" data-symbol="Si" data-number="14" data-properties="Hard, brittle, crystalline, semiconductor"data-Orbital="1s² 2s² 2p⁶ 3s² 3p²">Si</div>
+         <div class="element non-metal" data-name="Phosphorus" data-symbol="P" data-number="15" data-properties="Non-metal, highly reactive"data-Orbital="1s² 2s² 2p⁶ 3s² 3p³">P</div>
+         <div class="element non-metal" data-name="Sulfur" data-symbol="S" data-number="16" data-properties="Yellow, non-metal, used in fertilizers"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁴">S</div>
+         <div class="element non-metal" data-name="Chlorine" data-symbol="Cl" data-number="17" data-properties="Greenish-yellow gas, highly reactive"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁵">Cl</div>
+         <div class="element noble-gas" data-name="Argon" data-symbol="Ar" data-number="18" data-properties="Colorless, odorless, inert gas"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶">Ar</div>
+      </div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Potassium" data-symbol="K" data-number="19" data-properties="Soft, silvery metal, reacts with water"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹">K</div>
+         <div class="element metal" data-name="Calcium" data-symbol="Ca" data-number="20" data-properties="Soft, silvery metal, reacts with water"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s²">Ca</div>
+         <div class="element transition-metal" data-name="Scandium" data-symbol="Sc" data-number="21" data-properties="Soft, silvery-white metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹ 4s²">Sc</div>
+         <div class="element transition-metal" data-name="Titanium" data-symbol="Ti" data-number="22" data-properties="Strong, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d²">Ti</div>
+         <div class="element transition-metal" data-name="Vanadium" data-symbol="V" data-number="23" data-properties="Hard, silvery-grey metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³">V</div>
+         <div class="element transition-metal" data-name="Chromium" data-symbol="Cr" data-number="24" data-properties="Hard, shiny, steel-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵">Cr</div>
+         <div class="element transition-metal" data-name="Manganese" data-symbol="Mn" data-number="25" data-properties="Silvery-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵">Mn</div>
+         <div class="element transition-metal" data-name="Iron" data-symbol="Fe" data-number="26" data-properties="Silvery-gray metal, strong, magnetic" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶">Fe</div>
+         <div class="element transition-metal" data-name="Cobalt" data-symbol="Co" data-number="27" data-properties="Hard, magnetic, silvery-blue metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷">Co</div>
+         <div class="element transition-metal" data-name="Nickel" data-symbol="Ni" data-number="28" data-properties="Hard, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸">Ni</div>
+         <div class="element transition-metal" data-name="Copper" data-symbol="Cu" data-number="29" data-properties="Reddish-brown, soft, malleable metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁹">Cu</div>
+         <div class="element transition-metal" data-name="Zinc" data-symbol="Zn" data-number="30" data-properties="Bluish-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰">Zn</div>
+         <div class="element metal" data-name="Gallium" data-symbol="Ga" data-number="31" data-properties="Soft, silvery metal, low melting point"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p¹">Ga</div>
+         <div class="element metalloid" data-name="Germanium" data-symbol="Ge" data-number="32" data-properties="Gray-white, brittle metalloid, semiconductor"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²">Ge</div>
+         <div class="element metalloid" data-name="Arsenic" data-symbol="As" data-number="33" data-properties="Brittle metalloid, toxic"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³">As</div>
+         <div class="element non-metal" data-name="Selenium" data-symbol="Se" data-number="34" data-properties="Non-metal, metallic gray"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁴">Se</div>
+         <div class="element non-metal" data-name="Bromine" data-symbol="Br" data-number="35" data-properties="Red-brown liquid, toxic"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁵">Br</div>
+         <div class="element noble-gas" data-name="Krypton" data-symbol="Kr" data-number="36" data-properties="Colorless, odorless, inert gas"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶">Kr</div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Rubidium" data-symbol="Rb" data-number="37" data-properties="Soft, silvery-white, highly reactive"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹">Rb</div>
+         <div class="element metal" data-name="Strontium" data-symbol="Sr" data-number="38" data-properties="Soft, silvery-white metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s²">Sr</div>
+         <div class="element transition-metal" data-name="Yttrium" data-symbol="Y" data-number="39" data-properties="Soft, silvery metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹">Y</div>
+         <div class="element transition-metal" data-name="Zirconium" data-symbol="Zr" data-number="40" data-properties="Strong, silvery-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d²">Zr</div>
+         <div class="element transition-metal" data-name="Niobium" data-symbol="Nb" data-number="41" data-properties="Soft, gray metallic transition metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d³">Nb</div>
+         <div class="element transition-metal" data-name="Molybdenum" data-symbol="Mo" data-number="42" data-properties="Hard, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁴">Mo</div>
+         <div class="element transition-metal" data-name="Technetium" data-symbol="Tc" data-number="43" data-properties="Rare, radioactive metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁵">Tc</div>
+         <div class="element transition-metal" data-name="Ruthenium" data-symbol="Ru" data-number="44" data-properties="Hard, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁶">Ru</div>
+         <div class="element transition-metal" data-name="Rhodium" data-symbol="Rh" data-number="45" data-properties="Hard, silvery-white, metallic element" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁷">Rh</div>
+         <div class="element transition-metal" data-name="Palladium" data-symbol="Pd" data-number="46" data-properties="Silvery-white metal, ductile" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁸">Pd</div>
+         <div class="element transition-metal" data-name="Silver" data-symbol="Ag" data-number="47" data-properties="Soft, shiny metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰">Ag</div>
+         <div class="element transition-metal" data-name="Cadmium" data-symbol="Cd" data-number="48" data-properties="Soft, bluish-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰">Cd</div>
+         <div class="element metal" data-name="Indium" data-symbol="In" data-number="49" data-properties="Soft, malleable metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p¹">In</div>
+         <div class="element metal" data-name="Tin" data-symbol="Sn" data-number="50" data-properties="Soft, silvery metal, malleable"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p²">Sn</div>
+         <div class="element metalloid" data-name="Antimony" data-symbol="Sb" data-number="51" data-properties="Brittle metalloid"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p³">Sb</div>
+         <div class="element non-metal" data-name="Tellurium" data-symbol="Te" data-number="52" data-properties="Brittle metalloid, grayish-white"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁴">Te</div>
+         <div class="element non-metal" data-name="Iodine" data-symbol="I" data-number="53" data-properties="Purple-black solid, toxic"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁵">I</div>
+         <div class="element noble-gas" data-name="Xenon" data-symbol="Xe" data-number="54" data-properties="Colorless, dense, inert gas"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶">Xe</div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Cesium" data-symbol="Cs" data-number="55" data-properties="Soft, silvery-golden, highly reactive metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹">Cs</div>
+         <div class="element metal" data-name="Barium" data-symbol="Ba" data-number="56" data-properties="Soft, silvery metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s²">Ba</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element transition-metal" data-name="Hafnium" data-symbol="Hf" data-number="72" data-properties="Shiny, silvery-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d²">Hf</div>
+         <div class="element transition-metal" data-name="Tantalum" data-symbol="Ta" data-number="73" data-properties="Hard, blue-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d³">Ta</div>
+         <div class="element transition-metal" data-name="Tungsten" data-symbol="W" data-number="74" data-properties="Heavy, steel-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁴">W</div>
+         <div class="element transition-metal" data-name="Rhenium" data-symbol="Re" data-number="75" data-properties="Hard, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁵">Re</div>
+         <div class="element transition-metal" data-name="Osmium" data-symbol="Os" data-number="76" data-properties="Hard, blue-gray metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁶">Os</div>
+         <div class="element transition-metal" data-name="Iridium" data-symbol="Ir" data-number="77" data-properties="Hard, brittle, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁷">Ir</div>
+         <div class="element transition-metal" data-name="Platinum" data-symbol="Pt" data-number="78" data-properties="Heavy, silvery-white metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁸">Pt</div>
+         <div class="element transition-metal" data-name="Gold" data-symbol="Au" data-number="79" data-properties="Yellow, soft, malleable metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s¹ 5d¹⁰">Au</div>
+         <div class="element metal" data-name="Mercury" data-symbol="Hg" data-number="80" data-properties="Heavy, liquid metal" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰">Hg</div>
+         <div class="element metal" data-name="Thallium" data-symbol="Tl" data-number="81" data-properties="Soft, malleable, toxic metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p¹">Tl</div>
+         <div class="element metal" data-name="Lead" data-symbol="Pb" data-number="82" data-properties="Soft, malleable, toxic metal"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p²">Pb</div>
+         <div class="element metal" data-name="Bismuth" data-symbol="Bi" data-number="83" data-properties="Heavy metal, low toxicity"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p³">Bi</div>
+         <div class="element non-metal" data-name="Polonium" data-symbol="Po" data-number="84" data-properties="Radioactive, metalloid"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁴">Po</div>
+         <div class="element non-metal" data-name="Astatine" data-symbol="At" data-number="85" data-properties="Radioactive, halogen"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁵">At</div>
+         <div class="element noble-gas" data-name="Radon" data-symbol="Rn" data-number="86" data-properties="Radioactive, colorless gas"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶">Rn</div>
+      </div>
+      <div class="table">
+         <div class="element metal" data-name="Francium" data-symbol="Fr" data-number="87" data-properties="Highly radioactive, metallic element"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s¹">Fr</div>
+         <div class="element metal" data-name="Radium" data-symbol="Ra" data-number="88" data-properties="Highly radioactive, metallic element"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²">Ra</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element actinide" data-name="Rutherfordium" data-symbol="Rf" data-number="104" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d²">Rf</div>
+         <div class="element actinide" data-name="Dubnium" data-symbol="Db" data-number="105" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d³">Db</div>
+         <div class="element actinide" data-name="Seaborgium" data-symbol="Sg" data-number="106" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁴">Sg</div>
+         <div class="element actinide" data-name="Bohrium" data-symbol="Bh" data-number="107" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital=" 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁵">Bh</div>
+         <div class="element actinide" data-name="Hassium" data-symbol="Hs" data-number="108" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁶">Hs</div>
+         <div class="element actinide" data-name="Meitnerium" data-symbol="Mt" data-number="109" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁷">Mt</div>
+         <div class="element actinide" data-name="Darmstadtium" data-symbol="Ds" data-number="110" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁸">Ds</div>
+         <div class="element actinide" data-name="Roentgenium" data-symbol="Rg" data-number="111" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁹">Rg</div>
+         <div class="element actinide" data-name="Copernicium" data-symbol="Cn" data-number="112" data-properties="Synthetic, highly radioactive" onclick="openPopup(this)"data-Orbital="1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁹">Cn</div>
+         <div class="element actinide" data-name="Nihonium" data-symbol="Nh" data-number="113" data-properties="Synthetic, radioactive"data-Orbital=" 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p¹">Nh</div>
+         <div class="element actinide" data-name="Flerovium" data-symbol="Fl" data-number="114" data-properties="Synthetic, radioactive"data-Orbital=" [Rn] 5f¹⁴ 6d¹⁰ 7s² 7p²">Fi</div>
+         <div class="element actinide" data-name="Moscovium" data-symbol="Mc" data-number="115" data-properties="Synthetic, radioactive"data-Orbital="[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³">Mc</div>
+         <div class="element actinide" data-name="Livermorium" data-symbol="Lv" data-number="116" data-properties="Synthetic, radioactive"data-Orbital="[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p³">Lv</div>
+         <div class="element actinide" data-name="Tennessine" data-symbol="Ts" data-number="117" data-properties="Synthetic, radioactive"data-Orbital="[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵">Ts</div>
+         <div class="element actinide" data-name="Oganesson" data-symbol="Og" data-number="118" data-properties="Synthetic, radioactive"data-Orbital="[Rn] 5f¹⁴ 6d¹⁰ 7s² 7p⁵">Og</div>
+      </div>
+      <div class="table">
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+      </div>
+      <div class="table">
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+      </div>
+      <div class="table">
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element actinide" data-name="Lanthanum" data-symbol="La" data-number="57" data-properties="Soft, ductile, silvery-white metal"data-Orbital="[Xe] 4f¹ 5d¹ 6s²">La</div>
+         <div class="element actinide" data-name="Cerium" data-symbol="Ce" data-number="58" data-properties="Soft, silvery-white, metal"data-Orbital="[Xe] 4f² 5d¹ 6s²">Ce</div>
+         <div class="element actinide" data-name="Praseodymium" data-symbol="Pr" data-number="59" data-properties="Soft, silvery metal"data-Orbital="[Xe] 4f³ 6s²">Pr</div>
+         <div class="element actinide" data-name="Neodymium" data-symbol="Nd" data-number="60" data-properties="Hard, silvery metal"data-Orbital="[Xe] 4f⁴ 6s²">Nd</div>
+         <div class="element actinide" data-name="Promethium" data-symbol="Pm" data-number="61" data-properties="Radioactive, rare earth metal"data-Orbital="[Xe] 4f⁵ 6s²">Pm</div>
+         <div class="element actinide" data-name="Samarium" data-symbol="Sm" data-number="62" data-properties="Hard, silvery metal"data-Orbital="[Xe] 4f⁶ 6s²">Sm</div>
+         <div class="element actinide" data-name="Europium" data-symbol="Eu" data-number="63" data-properties="Soft, silvery metal"data-Orbital=" [Xe] 4f⁷ 6s²">Eu</div>
+         <div class="element actinide" data-name="Gadolinium" data-symbol="Gd" data-number="64" data-properties="Silvery-white, malleable, ductile metal"data-Orbital="[Xe] 4f⁷ 5d¹ 6s²">Gd</div>
+         <div class="element actinide" data-name="Terbium" data-symbol="Tb" data-number="65" data-properties="Soft, silvery metal"data-Orbital=" [Xe] 4f⁸ 5d¹ 6s²">Tb</div>
+         <div class="element actinide" data-name="Dysprosium" data-symbol="Dy" data-number="66" data-properties="Hard, silvery metal"data-Orbital="[Xe] 4f¹⁰ 5d⁰ 6s²">Dy</div>
+         <div class="element actinide" data-name="Holmium" data-symbol="Ho" data-number="67" data-properties="Soft, silvery metal"data-Orbital="[Xe] 4f¹¹ 5d⁰ 6s²">Ho</div>
+         <div class="element actinide" data-name="Erbium" data-symbol="Er" data-number="68" data-properties="Soft, silvery metal"data-Orbital="[Xe] 4f¹² 6s²">Er</div>
+         <div class="element actinide" data-name="Thulium" data-symbol="Tm" data-number="69" data-properties="Silvery-gray, malleable metal"data-Orbital=" [Xe] 4f¹³ 6s²">Tm</div>
+         <div class="element actinide" data-name="Ytterbium" data-symbol="Yb" data-number="70" data-properties="Soft, silvery metal"data-Orbital="[Xe] 4f¹⁴ 6s²">Yb</div>
+         <div class="element actinide" data-name="Lutetium" data-symbol="Lu" data-number="71" data-properties="Hard, silvery metal" data-Orbital="[Xe] 4f¹⁴ 5d¹ 6s²">Lu</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+      </div>
+      <div class="table">
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="element actinide" data-name="Actinium" data-symbol="Ac" data-number="89" data-properties="Soft, silvery-white, radioactive metal" data-Orbital="[Rn] 5f¹ 6d¹ 7s²">Ac</div>
+         <div class="element actinide" data-name="Thorium" data-symbol="Th" data-number="90" data-properties="Hard, silvery-white, radioactive metal" data-Orbital="[Rn] 6d² 7s²">Th</div>
+         <div class="element actinide" data-name="Protactinium" data-symbol="Pa" data-number="91" data-properties="Dense, silvery, radioactive metal" data-Orbital="[Rn] 5f² 6d¹ 7s²">Pa</div>
+         <div class="element actinide" data-name="Uranium" data-symbol="U" data-number="92" data-properties="Hard, dense, silvery-white metal" data-Orbital="[Rn] 5f³ 6d¹ 7s²">U</div>
+         <div class="element actinide" data-name="Neptunium" data-symbol="Np" data-number="93" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f⁴ 6d¹ 7s²">Np</div>
+         <div class="element actinide" data-name="Plutonium" data-symbol="Pu" data-number="94" data-properties="Highly radioactive, silvery metal" data-Orbital="[Rn] 5f⁶ 7s²">Pu</div>
+         <div class="element actinide" data-name="Americium" data-symbol="Am" data-number="95" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f⁷ 7s²">Am</div>
+         <div class="element actinide" data-name="Curium" data-symbol="Cm" data-number="96" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f⁷ 6d¹ 7s²">Cm</div>
+         <div class="element actinide" data-name="Berkelium" data-symbol="Bk" data-number="97" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f⁹ 7s²">Bk</div>
+         <div class="element actinide" data-name="Californium" data-symbol="Cf" data-number="98" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹⁰ 7s²">Cf</div>
+         <div class="element actinide" data-name="Einsteinium" data-symbol="Es" data-number="99" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹¹ 7s²">Es</div>
+         <div class="element actinide" data-name="Fermium" data-symbol="Fm" data-number="100" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹² 7s²">Fm</div>
+         <div class="element actinide" data-name="Mendelevium" data-symbol="Md" data-number="101" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹³ 7s²">Md</div>
+         <div class="element actinide" data-name="Nobelium" data-symbol="No" data-number="102" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹⁴ 7s²">No</div>
+         <div class="element actinide" data-name="Lawrencium" data-symbol="Lr" data-number="103" data-properties="Radioactive, silvery metal" data-Orbital="[Rn] 5f¹⁴ 6d¹ 7s²">Lr</div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+         <div class="" data-name="" data-symbol="" data-number="" data-properties="" onclick="openPopup(this)"></div>
+      </div>
+      <div id="popup" class="popup">
+         <h3 id="element-name"></h3>
+         <p><strong>Symbol:</strong> <span id="element-symbol"></span></p>
+         <p><strong>Atomic Number:</strong> <span id="atomic-number"></span></p>
+         <p><strong>Properties:</strong> <span id="element-properties"></span></p>
+         <p><strong>Orbital:</strong> <span id="element-orbital"></span></p>
+         <button class="close-btn" onclick="closePopup()">Close</button>
+     </div>
+     
+      <div id="popup-overlay" class="popup-overlay" style="display: none;" onclick="closePopup()"></div>
+      <div class="legend">
+         <div class="metal-legend">Metal <span>Green</span></div>
+         <div class="non-metal-legend">Non-metal <span>Red</span></div>
+         <div class="transition-metal-legend">Transition Metal <span>Yellow</span></div>
+         <div class="noble-gas-legend">Noble Gas <span>Blue</span></div>
+         <div class="actinide-legend">Actinide<span>Purple-black</span></div>
+         <div class="metalloid-legend">Metalloid <span>Gray</span></div>
+      </div>
+      <script>
+         function showElementInfo(element) {
+      const name = element.dataset.name;
+      const symbol = element.dataset.symbol;
+      const number = element.dataset.number;
+      const properties = element.dataset.properties;
+      const orbital = element.dataset.orbital; // ดึงค่า Orbital
+
+      document.getElementById('element-name').innerText = name;
+      document.getElementById('element-symbol').innerText = symbol;
+      document.getElementById('atomic-number').innerText = number;
+      document.getElementById('element-properties').innerText = properties;
+
+      // แสดงข้อมูล Orbital
+      const orbitalElement = document.getElementById('element-orbital');
+      if (orbitalElement) {
+        orbitalElement.innerText = orbital || "N/A"; // ใส่ข้อความ N/A ถ้าไม่มีค่า
+      }
+
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('popup-overlay').style.display = 'block';
+}
+         function closePopup() {
+             document.getElementById('popup').style.display = 'none';
+             document.getElementById('popup-overlay').style.display = 'none';
+         }
+         
+         document.querySelectorAll('.element').forEach(element => {
+             element.addEventListener('click', function() {
+                 showElementInfo(element);
+             });
+         });
+         
+         document.querySelectorAll('.element').forEach(element => {
+             element.addEventListener('mouseenter', function() {
+                 const bgColor = window.getComputedStyle(element).backgroundColor;
+                 element.style.boxShadow = `0 0 20px ${bgColor}`;
+             });
+         
+             element.addEventListener('mouseleave', function() {
+                 element.style.boxShadow = `0 0 10px rgba(255, 255, 255, 0.7)`;
+             });
+         });
+      </script>
+   </body>
+</html>
